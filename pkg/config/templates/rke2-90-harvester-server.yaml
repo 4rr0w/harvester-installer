@@ -1,0 +1,13 @@
+cni: multus,canal
+cluster-cidr: 10.52.0.0/16
+service-cidr: 10.53.0.0/16
+cluster-dns: 10.53.0.10
+tls-san:
+  - {{ .Vip }}
+{{- with $args :=  .GetKubeletArgs }}
+kubelet-arg:
+{{- range $arg := $args }}
+- {{ printf "%q" $arg }}
+{{- end }}
+{{- end }}
+audit-policy-file: /etc/rancher/rke2/config.yaml.d/92-harvester-kube-audit-policy.yaml

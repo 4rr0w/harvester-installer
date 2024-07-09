@@ -1,0 +1,8 @@
+iso:
+  uefi:
+    - dir:/grub2-efi
+  image:
+    - dir:/grub2-mbr
+    - dir:/grub2-efi
+    - dir:/boot-files
+  label: "COS_LIVE"
