@@ -55,10 +55,10 @@ func (c CPUCheck) Run() (msg string, err error) {
 	}
 	nproc, _ := strconv.Atoi(strings.TrimSpace(string(out)))
 	if nproc < MinCPUTest {
-		msg = fmt.Sprintf("Only %d CPU cores detected. Harvester requires at least %d cores for testing and %d for production use.",
+		msg = fmt.Sprintf("Only %d CPU cores detected. Orion requires at least %d cores for testing and %d for production use.",
 			nproc, MinCPUTest, MinCPUProd)
 	} else if nproc < MinCPUProd {
-		msg = fmt.Sprintf("%d CPU cores detected. Harvester requires at least %d cores for production use.",
+		msg = fmt.Sprintf("%d CPU cores detected. Orion requires at least %d cores for production use.",
 			nproc, MinCPUProd)
 	}
 	return
@@ -190,10 +190,10 @@ func (c MemoryCheck) Run() (string, error) {
 	}
 
 	if float32(memTotalGiB) < (MinMemoryTest * wiggleRoom) {
-		return fmt.Sprintf("Only %s RAM detected. Harvester requires at least %dGiB for testing and %dGiB for production use.",
+		return fmt.Sprintf("Only %s RAM detected. Orion requires at least %dGiB for testing and %dGiB for production use.",
 			memReported, MinMemoryTest, MinMemoryProd), nil
 	} else if float32(memTotalGiB) < (MinMemoryProd * wiggleRoom) {
-		return fmt.Sprintf("%s RAM detected. Harvester requires at least %dGiB for production use.",
+		return fmt.Sprintf("%s RAM detected. Orion requires at least %dGiB for production use.",
 			memReported, MinMemoryProd), nil
 	}
 
@@ -221,7 +221,7 @@ func (c VirtCheck) Run() (msg string, err error) {
 
 func (c KVMHostCheck) Run() (msg string, err error) {
 	if _, err = os.Stat(devKvm); errors.Is(err, fs.ErrNotExist) {
-		msg = "Harvester requires hardware-assisted virtualization, but /dev/kvm does not exist."
+		msg = "Orion requires hardware-assisted virtualization, but /dev/kvm does not exist."
 		err = nil
 	}
 	return
@@ -247,10 +247,10 @@ func (c NetworkSpeedCheck) Run() (msg string, err error) {
 		// Does anyone even _have_ < 1Gbps networking kit anymore?
 		// Still, it's theoretically possible someone could have messed
 		// up their switch config and be running 100Mbps...
-		msg = fmt.Sprintf("Link speed of %s is only %dMpbs. Harvester requires at least %dGbps for testing and %dGbps for production use.",
+		msg = fmt.Sprintf("Link speed of %s is only %dMpbs. Orion requires at least %dGbps for testing and %dGbps for production use.",
 			c.Dev, speedMbps, MinNetworkGbpsTest, MinNetworkGbpsProd)
 	} else if speedGbps < MinNetworkGbpsProd {
-		msg = fmt.Sprintf("Link speed of %s is %gGbps. Harvester requires at least %dGbps for production use.",
+		msg = fmt.Sprintf("Link speed of %s is %gGbps. Orion requires at least %dGbps for production use.",
 			c.Dev, speedGbps, MinNetworkGbpsProd)
 	}
 	return

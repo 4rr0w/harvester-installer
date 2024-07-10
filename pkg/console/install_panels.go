@@ -793,7 +793,7 @@ func addAskCreatePanel(c *Console) error {
 		if !alreadyInstalled {
 			options = append(options, widgets.Option{
 				Value: config.ModeInstall,
-				Text:  "Install Harvester binaries only",
+				Text:  "Install Orion binaries only",
 			})
 		}
 		return options, nil
