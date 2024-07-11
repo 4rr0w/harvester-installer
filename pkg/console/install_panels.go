@@ -771,10 +771,10 @@ func addAskCreatePanel(c *Console) error {
 		options := []widgets.Option{
 			{
 				Value: config.ModeCreate,
-				Text:  "Create a new Harvester cluster",
+				Text:  "Create a new Orion cluster",
 			}, {
 				Value: config.ModeJoin,
-				Text:  "Join an existing Harvester cluster",
+				Text:  "Join an existing Orion cluster",
 			},
 		}
 		installed, err := harvesterInstalled()
@@ -783,7 +783,7 @@ func addAskCreatePanel(c *Console) error {
 		} else if installed {
 			options = append(options, widgets.Option{
 				Value: config.ModeUpgrade,
-				Text:  "Upgrade Harvester",
+				Text:  "Upgrade Orion",
 			})
 		}
 
@@ -793,7 +793,7 @@ func addAskCreatePanel(c *Console) error {
 		if !alreadyInstalled {
 			options = append(options, widgets.Option{
 				Value: config.ModeInstall,
-				Text:  "Install Harvester binaries only",
+				Text:  "Install Orion binaries only",
 			})
 		}
 		return options, nil
@@ -812,7 +812,7 @@ func addAskCreatePanel(c *Console) error {
 		c.config.SkipChecks = true
 		askCreateV.Value = c.config.Install.Mode
 		if alreadyInstalled {
-			return c.setContentByName(titlePanel, "Harvester already installed. Choose configuration mode")
+			return c.setContentByName(titlePanel, "Orion already installed. Choose configuration mode")
 		}
 		return c.setContentByName(titlePanel, "Choose installation mode")
 	}
