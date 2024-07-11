@@ -125,8 +125,8 @@ func TestCPUCheck(t *testing.T) {
 	defer func() { execCommand = exec.Command }()
 
 	expectedOutputs := map[string]string{
-		"nproc 4":  "Only 4 CPU cores detected. Harvester requires at least 8 cores for testing and 16 for production use.",
-		"nproc 8":  "8 CPU cores detected. Harvester requires at least 16 cores for production use.",
+		"nproc 4":  "Only 4 CPU cores detected. Orion requires at least 8 cores for testing and 16 for production use.",
+		"nproc 8":  "8 CPU cores detected. Orion requires at least 16 cores for production use.",
 		"nproc 16": "",
 	}
 
@@ -165,8 +165,8 @@ func TestMemoryCheckDmiDecode(t *testing.T) {
 	defer func() { execCommand = exec.Command }()
 
 	expectedOutputs := map[string]string{
-		"dmidecode-8GiB":  "Only 8GiB RAM detected. Harvester requires at least 32GiB for testing and 64GiB for production use.",
-		"dmidecode-32GiB": "32GiB RAM detected. Harvester requires at least 64GiB for production use.",
+		"dmidecode-8GiB":  "Only 8GiB RAM detected. Orion requires at least 32GiB for testing and 64GiB for production use.",
+		"dmidecode-32GiB": "32GiB RAM detected. Orion requires at least 64GiB for production use.",
 		"dmidecode-64GiB": "",
 	}
 
@@ -191,8 +191,8 @@ func TestMemoryCheckProcMemInfo(t *testing.T) {
 	}
 
 	expectedOutputs := map[string]string{
-		"./testdata/meminfo-512MiB": "Only 447MiB RAM detected. Harvester requires at least 32GiB for testing and 64GiB for production use.",
-		"./testdata/meminfo-32GiB":  "31GiB RAM detected. Harvester requires at least 64GiB for production use.",
+		"./testdata/meminfo-512MiB": "Only 447MiB RAM detected. Orion requires at least 32GiB for testing and 64GiB for production use.",
+		"./testdata/meminfo-32GiB":  "31GiB RAM detected. Orion requires at least 64GiB for production use.",
 		"./testdata/meminfo-64GiB":  "",
 	}
 
@@ -210,7 +210,7 @@ func TestKVMHostCheck(t *testing.T) {
 	defer func() { devKvm = defaultDevKvm }()
 
 	expectedOutputs := map[string]string{
-		"./testdata/dev-kvm-does-not-exist": "Harvester requires hardware-assisted virtualization, but /dev/kvm does not exist.",
+		"./testdata/dev-kvm-does-not-exist": "Orion requires hardware-assisted virtualization, but /dev/kvm does not exist.",
 		"./testdata/dev-kvm":                "",
 	}
 
@@ -228,9 +228,9 @@ func TestNetworkSpeedCheck(t *testing.T) {
 	defer func() { sysClassNetDevSpeed = defaultSysClassNetDevSpeed }()
 
 	expectedOutputs := map[string]string{
-		"./testdata/%s-speed-100":   "Link speed of eth0 is only 100Mpbs. Harvester requires at least 1Gbps for testing and 10Gbps for production use.",
-		"./testdata/%s-speed-1000":  "Link speed of eth0 is 1Gbps. Harvester requires at least 10Gbps for production use.",
-		"./testdata/%s-speed-2500":  "Link speed of eth0 is 2.5Gbps. Harvester requires at least 10Gbps for production use.",
+		"./testdata/%s-speed-100":   "Link speed of eth0 is only 100Mpbs. Orion requires at least 1Gbps for testing and 10Gbps for production use.",
+		"./testdata/%s-speed-1000":  "Link speed of eth0 is 1Gbps. Orion requires at least 10Gbps for production use.",
+		"./testdata/%s-speed-2500":  "Link speed of eth0 is 2.5Gbps. Orion requires at least 10Gbps for production use.",
 		"./testdata/%s-speed-10000": "",
 	}
 
