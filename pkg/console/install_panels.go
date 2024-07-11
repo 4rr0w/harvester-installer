@@ -2186,7 +2186,7 @@ func addInstallPanel(c *Console) error {
 		}()
 		return c.setContentByName(footerPanel, "")
 	}
-	installV.Title = " Installing Harvester "
+	installV.Title = " Installing Orion "
 	installV.SetLocation(maxX/8, maxY/8, maxX/8*7, maxY/8*7)
 	installV.Wrap = true
 	installV.Autoscroll = true
@@ -2211,7 +2211,7 @@ func addUpgradePanel(c *Console) error {
 		go doUpgrade(c.Gui)
 		return c.setContentByName(footerPanel, "")
 	}
-	upgradeV.Title = " Upgrading Harvester "
+	upgradeV.Title = " Upgrading Orion "
 	upgradeV.SetLocation(maxX/8, maxY/8, maxX/8*7, maxY/8*7)
 	c.AddElement(upgradePanel, upgradeV)
 	upgradeV.Frame = true
