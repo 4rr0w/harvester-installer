@@ -148,7 +148,9 @@ func (c *Console) doRun() error {
 
 	// installModeBoot is used to control options in layoutInstall
 	if c.config.Install.Mode == config.ModeInstall {
+
 		logrus.Info("orion already installed")
+
 		alreadyInstalled = true
 		c.config.Install.Mode = ""
 	}
