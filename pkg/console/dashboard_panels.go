@@ -31,7 +31,7 @@ const (
 	statusReady         = "Ready"
 	statusNotReady      = "NotReady"
 	statusSettingUpNode = "Setting up node"
-	statusSettingUpHarv = "Setting up Harvester"
+	statusSettingUpHarv = "Setting up Orion"
 
 	defaultHarvesterConfig = "/oem/harvester.config"
 	defaultCustomConfig    = "/oem/99_custom.yaml"
@@ -149,7 +149,7 @@ func footer(g *gocui.Gui) error {
 			return err
 		}
 		v.Frame = false
-		fmt.Fprintf(v, "<Use F12 to switch between Harvester console and Shell>")
+		fmt.Fprintf(v, "<Use F12 to switch between Orion console and Shell>")
 	}
 	return nil
 }
@@ -364,7 +364,7 @@ func getNodeInfo() string {
 	out, err = exec.Command("/bin/sh", "-c", cmd).Output()
 	device = string(out)
 	if err != nil || device == "" {
-		logrus.Infof("default gateway is not existing. Fallback to harvester-mgmt")
+		logrus.Infof("default gateway is not existing. Fallback to orion-mgmt")
 		// find the IP from harvester-mgmt
 		device = "harvester-mgmt"
 	}
@@ -560,10 +560,10 @@ func (c *Console) getHarvesterConfig() error {
 	content, err := ioutil.ReadFile(defaultHarvesterConfig)
 	if err != nil {
 		if os.IsNotExist(err) {
-			logrus.Infof("no existing harvester config detected in %s", defaultHarvesterConfig)
+			logrus.Infof("no existing orion config detected in %s", defaultHarvesterConfig)
 			return nil
 		}
-		return fmt.Errorf("unable to read default harvester.config file %s: %v", defaultHarvesterConfig, err)
+		return fmt.Errorf("unable to read default orion.config file %s: %v", defaultHarvesterConfig, err)
 	}
 
 	return yaml.Unmarshal(content, c.config)

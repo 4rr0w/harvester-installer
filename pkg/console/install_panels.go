@@ -771,10 +771,10 @@ func addAskCreatePanel(c *Console) error {
 		options := []widgets.Option{
 			{
 				Value: config.ModeCreate,
-				Text:  "Create a new Harvester cluster",
+				Text:  "Create a new Orion cluster",
 			}, {
 				Value: config.ModeJoin,
-				Text:  "Join an existing Harvester cluster",
+				Text:  "Join an existing Orion cluster",
 			},
 		}
 		installed, err := harvesterInstalled()
@@ -783,7 +783,7 @@ func addAskCreatePanel(c *Console) error {
 		} else if installed {
 			options = append(options, widgets.Option{
 				Value: config.ModeUpgrade,
-				Text:  "Upgrade Harvester",
+				Text:  "Upgrade Orion",
 			})
 		}
 
@@ -812,7 +812,7 @@ func addAskCreatePanel(c *Console) error {
 		c.config.SkipChecks = true
 		askCreateV.Value = c.config.Install.Mode
 		if alreadyInstalled {
-			return c.setContentByName(titlePanel, "Harvester already installed. Choose configuration mode")
+			return c.setContentByName(titlePanel, "Orion already installed. Choose configuration mode")
 		}
 		return c.setContentByName(titlePanel, "Choose installation mode")
 	}
@@ -1858,7 +1858,7 @@ func addCloudInitPanel(c *Console) error {
 	cloudInitV.PreShow = func() error {
 		c.Gui.Cursor = true
 		cloudInitV.Value = c.config.Install.ConfigURL
-		return c.setContentByName(titlePanel, "Optional: remote Harvester config")
+		return c.setContentByName(titlePanel, "Optional: remote Orion config")
 	}
 	gotoNextPage := func() error {
 		cloudInitV.Close()
@@ -1958,13 +1958,13 @@ func addConfirmInstallPanel(c *Console) error {
 		if !c.config.Install.Silent {
 			if alreadyInstalled {
 				confirmV.SetContent(options +
-					"\nHarvester is already installed. It will be configured with the above configuration. Continue?\n")
+					"\nOrion is already installed. It will be configured with the above configuration. Continue?\n")
 			} else if installModeOnly {
 				confirmV.SetContent(options +
-					"\nHarvester will be copied to local disk. No configuration will be performed. Continue?\n")
+					"\nOrion will be copied to local disk. No configuration will be performed. Continue?\n")
 			} else {
 				confirmV.SetContent(options +
-					"\nYour disk will be formatted and Harvester will be installed with the above configuration. Continue?\n")
+					"\nYour disk will be formatted and Orion will be installed with the above configuration. Continue?\n")
 			}
 		}
 		c.Gui.Cursor = false
@@ -2015,7 +2015,7 @@ func addConfirmUpgradePanel(c *Console) error {
 		return err
 	}
 	confirmV.PreShow = func() error {
-		return c.setContentByName(titlePanel, fmt.Sprintf("Confirm upgrading Harvester to %s?", version.Version))
+		return c.setContentByName(titlePanel, fmt.Sprintf("Confirm upgrading Orion to %s?", version.Version))
 	}
 	confirmV.KeyBindings = map[gocui.Key]func(*gocui.Gui, *gocui.View) error{
 		gocui.KeyEnter: func(_ *gocui.Gui, _ *gocui.View) error {
@@ -2186,7 +2186,7 @@ func addInstallPanel(c *Console) error {
 		}()
 		return c.setContentByName(footerPanel, "")
 	}
-	installV.Title = " Installing Harvester "
+	installV.Title = " Installing Orion "
 	installV.SetLocation(maxX/8, maxY/8, maxX/8*7, maxY/8*7)
 	installV.Wrap = true
 	installV.Autoscroll = true
@@ -2211,7 +2211,7 @@ func addUpgradePanel(c *Console) error {
 		go doUpgrade(c.Gui)
 		return c.setContentByName(footerPanel, "")
 	}
-	upgradeV.Title = " Upgrading Harvester "
+	upgradeV.Title = " Upgrading Orion "
 	upgradeV.SetLocation(maxX/8, maxY/8, maxX/8*7, maxY/8*7)
 	c.AddElement(upgradePanel, upgradeV)
 	upgradeV.Frame = true
