@@ -40,9 +40,10 @@ RUN mkdir /usr/tmp && \
     curl ${HELM_URL} | tar xvzf - --strip-components=1 -C /usr/tmp/ && \
     mv /usr/tmp/helm /usr/bin/helm
 
-ARG LOCAL_HARVESTER_SRC
+ENV LOCAL_HARVESTER_SRC "/home/arrow/orion/orion"
+RUN echo LOCAL_HARVESTER_SRC
 ENV HARVESTER_SRC_MOUNT="${LOCAL_HARVESTER_SRC:+-v $LOCAL_HARVESTER_SRC:/go/src/github.com/harvester/harvester}"
-RUN echo ${LOCAL_HARVESTER_SRC}
+RUN echo $HARVESTER_SRC_MOUNT
 ARG LOCAL_ADDONS_SRC
 ENV ADDONS_SRC_MOUNT="${LOCAL_ADDONS_SRC:+-v $LOCAL_ADDONS_SRC:/go/src/github.com/harvester/addons}"
 
