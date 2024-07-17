@@ -9,3 +9,4 @@
 /package/harvester-os/harvester-release.yaml
 /dist-*
 .env*
+.env
