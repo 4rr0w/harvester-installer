@@ -18,9 +18,6 @@ ENV LOCAL_HARVESTER_SRC=$LOCAL_HARVESTER_SRC
 ARG DAPPER_HOST_ARCH
 ENV ARCH $DAPPER_HOST_ARCH
 
-# Set USE_LOCAL_IMAGES to true
-ENV USE_LOCAL_IMAGES=true
-
 # mtools and dosfstools are requirements for luet-makeiso >= 0.4.0 to build hybrid ISO.
 RUN zypper -n rm container-suseconnect && \
     zypper -n install git curl docker gzip tar wget zstd squashfs xorriso awk jq mtools dosfstools unzip rsync patch
