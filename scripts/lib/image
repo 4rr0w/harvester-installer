@@ -48,6 +48,8 @@ pull_images() {
   local image_cache_db=${SCRIPTS_DIR}/images/cache.yaml
   local repository
 
+  echo "--------Use Local Images: $USE_LOCAL_IMAGES-----------"
+
   if [ -z "$USE_LOCAL_IMAGES" ]; then
     echo "Pulling images..."
     for image in $(cat $image_list); do
