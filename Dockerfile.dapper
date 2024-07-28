@@ -9,17 +9,19 @@ ENV http_proxy=$http_proxy
 ENV https_proxy=$https_proxy
 ENV no_proxy=$no_proxy
 
-ARG HARVESTER_INSTALLER_OFFLINE_BUILD
+ARG ADDONS_SRC_MOUNT
+ARG HARVESTER_SRC_MOUNT="-v /home/arrow/Desktop/projects/harvester/harvester:/go/src/github.com/harvester/harvester"
+ENV ADDONS_SRC_MOUNT=$ADDONS_SRC_MOUNT
+ENV HARVESTER_SRC_MOUNT=$HARVESTER_SRC_MOUNT
+
+ARG HARVESTER_INSTALLER_OFFLINE_BUILD=$HARVESTER_INSTALLER_OFFLINE_BUILD
+ARG USE_LOCAL_IMAGES=$USE_LOCAL_IMAGES
 ENV HARVESTER_INSTALLER_OFFLINE_BUILD=$HARVESTER_INSTALLER_OFFLINE_BUILD
-
-ARG LOCAL_HARVESTER_SRC
-ENV LOCAL_HARVESTER_SRC=$LOCAL_HARVESTER_SRC
-
-ARG USE_LOCAL_IMAGES
 ENV USE_LOCAL_IMAGES=$USE_LOCAL_IMAGES
 
-ARG DAPPER_HOST_ARCH
+ARG DAPPER_HOST_ARCH=$HARVESTER_INSTALLER_OFFLINE_BUILD
 ENV ARCH $DAPPER_HOST_ARCH
+
 
 # mtools and dosfstools are requirements for luet-makeiso >= 0.4.0 to build hybrid ISO.
 RUN zypper -n rm container-suseconnect && \
@@ -45,10 +47,6 @@ ENV HELM_URL=https://get.helm.sh/helm-${HELM_VERSION}-linux-${ARCH}.tar.gz
 RUN mkdir /usr/tmp && \
     curl ${HELM_URL} | tar xvzf - --strip-components=1 -C /usr/tmp/ && \
     mv /usr/tmp/helm /usr/bin/helm
-
-ENV HARVESTER_SRC_MOUNT="${LOCAL_HARVESTER_SRC:+-v $LOCAL_HARVESTER_SRC:/go/src/github.com/harvester/harvester}"
-ARG LOCAL_ADDONS_SRC
-ENV ADDONS_SRC_MOUNT="${LOCAL_ADDONS_SRC:+-v $LOCAL_ADDONS_SRC:/go/src/github.com/harvester/addons}"
 
 # You cloud defined your own rke2 url by setup `RKE2_IMAGE_REPO`
 ENV DAPPER_ENV REPO TAG DRONE_TAG DRONE_BRANCH CROSS RKE2_IMAGE_REPO USE_LOCAL_IMAGES BUILD_QCOW DRONE_BUILD_EVENT REMOTE_DEBUG
