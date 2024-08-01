@@ -47,15 +47,14 @@ pull_images() {
   local image_list=$1
   local image_cache_db=${SCRIPTS_DIR}/images/cache.yaml
   local repository
-  # local USE_LOCAL_IMAGES="true"
 
-  # if [ -z "$USE_LOCAL_IMAGES" ]; then
-  #   echo "Pulling images quietly..."
-  #   for image in $(cat $image_list); do
-  #     docker image pull --quiet $image
-  #   done
-  #   return
-  # fi
+  if [ -z "$USE_LOCAL_IMAGES" ]; then
+    echo "Pulling images quietly..."
+    for image in $(cat $image_list); do
+      docker image pull --quiet $image
+    done
+    return
+  fi
 
   # If an image is in the exlcude list or its tag ends with "-head", we always pull it.
   # Otherwise, we check if the image exists on the system. If yes, we do nothing.
