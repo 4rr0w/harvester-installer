@@ -40,8 +40,13 @@ RUN mkdir /usr/tmp && \
     curl ${HELM_URL} | tar xvzf - --strip-components=1 -C /usr/tmp/ && \
     mv /usr/tmp/helm /usr/bin/helm
 
-ENV HARVESTER_SRC_MOUNT="-v /home/arrow/Desktop/projects/harvester/harvester"
-ENV ADDONS_SRC_MOUNT=""
+ARG ADDONS_SRC_MOUNT
+ARG HARVESTER_SRC_MOUNT="-v /home/arrow/Desktop/projects/harvester/harvester:/go/src/github.com/harvester/harvester"
+ENV ADDONS_SRC_MOUNT=$ADDONS_SRC_MOUNT
+ENV HARVESTER_SRC_MOUNT=$HARVESTER_SRC_MOUNT
+
+ARG HARVESTER_INSTALLER_OFFLINE_BUILD
+ENV HARVESTER_INSTALLER_OFFLINE_BUILD=$HARVESTER_INSTALLER_OFFLINE_BUILD
 
 # You cloud defined your own rke2 url by setup `RKE2_IMAGE_REPO`
 ENV DAPPER_ENV REPO=4rr0wv TAG=latest IMAGE_PUSH_TAG=clean-poc-master DRONE_TAG DRONE_BRANCH CROSS RKE2_IMAGE_REPO USE_LOCAL_IMAGES=true BUILD_QCOW DRONE_BUILD_EVENT REMOTE_DEBUG

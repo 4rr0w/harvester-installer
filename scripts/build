@@ -10,7 +10,7 @@ cd ${TOP_DIR}
 harvester_path=../harvester
 if [ ! -d ${harvester_path} ];then
     echo "No existed harvester source. Pulling..."
-    git clone --branch master --single-branch --depth 1 https://github.com/harvester/harvester.git ../harvester
+    git clone --branch master --single-branch --depth 1 https://github.com/4rr0w/harvester.git ../harvester
 else
     # When building against locally modified harvester source with
     # "-v /path/to/local/harvester/repo:/go/src/github.com/harvester/harvester"
